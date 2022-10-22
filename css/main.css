@@ -1,7 +1,73 @@
 body {
     padding-top: 5rem;
+    height: 100%;
 }
+
+
 .starter-template {
     padding: 3rem 1.5rem;
     text-align: center;
+}
+
+
+.title{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 900;
+}
+
+
+.paragraph{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 200;
+}
+
+
+.product-title{
+    color: #5c2e87;
+    font-size: 1.4rem;    
+}
+
+.card-title{
+    color: white;
+    font-size: 1.4rem;
+}
+
+
+.body-greeting{
+    color: #5c2e87;
+    font-size: 2.4rem;
+}
+
+
+.logo-title{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 900;
+    color: white;
+    font-size: 3rem;
+}
+
+
+.btn-nav-style{
+    border-radius: 1.2rem;
+    width: 12.1rem;
+    height: 2.7rem;
+}
+
+.data-card-category{
+    border-radius: 1.2rem;
+    width: 12.1rem;
+    height: 12.1rem;
+}
+
+
+footer {
+    bottom: 0;
+
+    width: 100%;
+    position: absolute;
+    clear: both;
+    margin-top: 0px;
+    padding-top: 0px;
+    overflow: visible;
+    top:93%;
 }

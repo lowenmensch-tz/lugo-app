@@ -10,51 +10,60 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+
+    <nav class="navbar navbar-expand-md fixed-top justify-content-between" style="height: 6rem;  background-color: #5c3287">
         
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+        <div class="ml-5">
+            <h1 class="logo-title">lugo</h1>
+        </div>
+        
+        <form class="form-inline">
+            
+            <div class="dropdown" style="text-align: center;" >
+                <button class="btn btn-secondary dropdown-toggle btn-nav-style" style="width:15rem; background-color: white; color:#440f71; " type="button" id="dropdownUsers" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Seleccione un usuario
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownUsers" id="dropdownMenuUsers">
                 </div>
-            </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>
+              </div>
+              
+            <button class="btn ml-4 btn-nav-style"  type="submit" style="background-color: #440f71; color: white;">
+                Ver Ordenes
+            </button>
+        </form>
+    </nav>
+        
+    <main role="main">
+    
+        <div class="mt-xl-4">
+            <div class="container">
+                <div class="ml-3" id="greeting" style="height: 6rem;"></div>
+                <div id="categories" class="row"></div>
+            </div>
         </div>
-        </nav>
-        
-        <main role="main" class="container">
-        
-        <div class="starter-template">
-            <img src="img/meme.jpg" alt="" srcset="">
-            <p class="lead">Éxitos</p>
+    
+    </main><!-- /.container -->
+
+    <footer id="sticky-footer" class="flex-shrink-0 py-4 text-white-50" style="background-color: #440f71;">
+        <div class="container text-center">
+          <small>Copyright &copy; </small>
         </div>
-        
-        </main><!-- /.container -->
+    </footer>
+
+    <!-- Modal Visualizar datos de la categorías-->
+    <div class="modal fade" id="categoryDataModal" tabindex="-1" role="dialog" aria-labelledby="categoryDataModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" id="categoryDataModalContent">
+            </div>
+        </div>
+    </div>
+    
               
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/db.js"></script>
+    <script src="js/utils.js"></script>
     <script src="js/controlador.js"></script>
 </body>
 </html>
