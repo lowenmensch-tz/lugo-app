@@ -27,7 +27,7 @@
                 </div>
               </div>
               
-            <button class="btn ml-4 btn-nav-style"  type="submit" style="background-color: #440f71; color: white;">
+            <button class="btn ml-4 btn-nav-style"  id="seeOrders" type="submit" style="background-color: #440f71; color: white;" disabled>
                 Ver Ordenes
             </button>
         </form>
@@ -41,6 +41,13 @@
                 <div id="categories" class="row"></div>
             </div>
         </div>
+
+        <!-- Add app -->
+        <button id="formAddCategory" class="btn my-lg-4 my-sm-0 add-app" type="button" data-toggle="modal" data-target="#addCategoryDataModal">
+            <a>
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z"></path></svg>
+            </a>
+        </button>
     
     </main><!-- /.container -->
 
@@ -50,10 +57,29 @@
         </div>
     </footer>
 
+    
     <!-- Modal Visualizar datos de la categorías-->
-    <div class="modal fade" id="categoryDataModal" tabindex="-1" role="dialog" aria-labelledby="categoryDataModalLabel" aria-hidden="true">
+    <div class="modal fade" id="categoryDataModal" tabindex="-2" role="dialog" aria-labelledby="categoryDataModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" id="categoryDataModalContent">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal pedir un producto-->
+    <div class="modal fade" id="processOrderDataModal" tabindex="-1" role="dialog" aria-labelledby="processOrderDataModalLabel" aria-hidden="true" style="background: rgba(0,0,0,0.5);">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" id="processOrderModalContent">
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal formulario para agregar una categoría-->
+    <div class="modal fade" id="addCategoryDataModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryDataModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" id="addCategoryModalContent">
             </div>
         </div>
     </div>
