@@ -27,7 +27,7 @@
                 </div>
               </div>
               
-            <button class="btn ml-4 btn-nav-style"  id="seeOrders" type="submit" style="background-color: #440f71; color: white;" disabled>
+            <button class="btn ml-4 btn-nav-style"  id="seeOrders" type="submit" style="background-color: #440f71; color: white;" disabled onclick="populateOrdersFromUsers()">
                 Ver Ordenes
             </button>
         </form>
@@ -76,6 +76,15 @@
     </div>
 
 
+    <!-- Modal ver ordenes de compra de un usuario-->
+    <div class="modal fade" id="getOrdersFromUsersModal" tabindex="-1" role="dialog" aria-labelledby="getOrdersFromUsersModalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered" role="document">
+            <div class="modal-content" id="getOrdersFromUsersModalContent">
+            </div>
+        </div>
+    </div>
+
+
     <!-- Modal formulario para agregar una categoría-->
     <div class="modal fade" id="addCategoryDataModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryDataModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -88,8 +97,8 @@
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/db.js"></script>
     <script src="js/utils.js"></script>
+    <script src="js/db.js"></script>
     <script src="js/controlador.js"></script>
 </body>
 </html>

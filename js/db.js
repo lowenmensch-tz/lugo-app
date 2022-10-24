@@ -492,7 +492,56 @@ var categorias = [
     }
 ];
 
-let localStorage = window.localStorage
-let userCollectionName = 'usuarios';
-let categoryCollectionName = 'categorias';
+var localStorage = window.localStorage
+var userCollectionName = 'usuarios';
+var categoryCollectionName = 'categorias';
 
+function getUsers(){
+    return  JSON.parse(localStorage.getItem(userCollectionName)); 
+}
+
+
+function getCategories(){
+    return  JSON.parse(localStorage.getItem(categoryCollectionName)); 
+}
+
+
+function saveDataCategory(data){
+    localStorage.setItem(categoryCollectionName, JSON.stringify(data));
+}
+
+
+function saveDataUser(data){
+    localStorage.setItem(userCollectionName, JSON.stringify(data));
+}
+ 
+
+function getOrdersFromUsersByUsername(username){
+    
+    let usernameSplit = splitName(username);
+    let user = getUsers().filter( user => ((user.nombre == usernameSplit.firstName) && (user.apellido == usernameSplit.lastName)) )[0];
+    let orders = user.ordenes;
+
+    return orders;
+}
+
+
+function updateUserPurchaseOrder(username, newOrder){
+    
+    let usernameSplit = splitName(username);
+    let users = getUsers();
+    let currentOrders = getOrdersFromUsersByUsername(username);
+    
+    currentOrders.push( newOrder );
+    
+    for (let index = 0; index < users.length; index++) {
+        if( 
+            ((users[index].nombre == usernameSplit.firstName) 
+                && 
+                (users[index].apellido == usernameSplit.lastName)) ){
+                users[index].ordenes = currentOrders;
+        }
+    }
+
+    saveDataUser(users);
+}

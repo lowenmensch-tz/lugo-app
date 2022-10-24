@@ -1,30 +1,19 @@
 var dropdownObjects = [];
+var username;
+
 
 document.addEventListener('DOMContentLoaded', function(event) {
-    if( !localStorage.getItem(userCollectionName) ){
+    if( !getUsers() ){
+        saveDataUser(usuarios);
     
-        localStorage.setItem(userCollectionName, JSON.stringify(usuarios));
-    
-    } else if (!localStorage.getItem(categoryCollectionName)){
-        
-        localStorage.setItem(categoryCollectionName, JSON.stringify(categorias));
-    
+    } else if (!getCategories()){
+        saveDataCategory(categorias);
     }else{
         console.log('Ya existen datos en el localstorage');
         populateDropdownMenuUsers();
         populateDataCardCategory();
     }
 });
-
-
-function getUsers(){
-    return  JSON.parse(localStorage.getItem(userCollectionName)); 
-}
-
-
-function getCategories(){
-    return  JSON.parse(localStorage.getItem(categoryCollectionName)); 
-}
 
 
 function updateDropdownMenu(){
@@ -40,7 +29,6 @@ function updateDropdownMenu(){
     });
 }
 
-var username;
 
 function loadUsernameDropdown(username){
     
@@ -166,7 +154,11 @@ function populateListGroupItemProduct(products){
                                 <div class="col-5">
                                     <button 
                                             class="btn paragraph"  
-                                            style="background-color: #440f71; color: white; font-size: 0.8rem; border-radius: 1.2rem;" ${btnSeeOrders.disabled? 'disabled' : ''} data-toggle="modal" data-target="#processOrderDataModal" onClick="populateFormProcessOrder('${product.nombreProducto}', '${product.descripcion}', ${product.precio})">
+                                            style="background-color: #440f71; color: white; font-size: 0.8rem; border-radius: 1.2rem;" ${btnSeeOrders.disabled? 'disabled' : ''} 
+                                            data-toggle="modal" 
+                                            data-target="#processOrderDataModal" 
+                                            onClick="populateFormProcessOrder('${product.nombreProducto}', '${product.descripcion}', ${product.precio})"
+                                    >
                                         Pedir
                                     </button>
                                 </div>
@@ -200,11 +192,6 @@ function populateListGroupItemProduct(products){
 }
 
 
-function activateModal(id){
-    $(`#${id}`).modal({show:true});
-}
-
-
 function populateFormProcessOrder(productName, productDescription, priceProduct){
     
     const modalContent = document.getElementById('processOrderModalContent'); 
@@ -233,7 +220,7 @@ function populateFormProcessOrder(productName, productDescription, priceProduct)
                 </div>
 
                 <div class="col-5 paragraph" >
-                    <input class="form-control" type="number">
+                    <input class="form-control" type="number" id="quantityProducts">
                 </div>
             </div>
             <br>
@@ -251,11 +238,30 @@ function populateFormProcessOrder(productName, productDescription, priceProduct)
     <div class="modal-footer">
         <button 
             class="btn paragraph"  
-            style="background-color: #440f71; color: white; font-size: 0.8rem; border-radius: 1.2rem;">
+            style="background-color: #440f71; color: white; font-size: 0.8rem; border-radius: 1.2rem;"
+            onClick="processOrder('${productName}', '${productDescription}', ${priceProduct})"
+        >
             Procesar Orden
         </button>
     </div>
     `
+}
+
+
+function processOrder(productName, productDescription, priceProduct){
+    
+    let quantityProducts = convertTextToNumber(
+        document.getElementById('quantityProducts').value
+    ); 
+
+    let newOrder = {
+        nombreProducto: productName,
+        descripcion: productDescription,
+        cantidad: quantityProducts,
+        precio: priceProduct,
+    }
+
+    updateUserPurchaseOrder(username, newOrder);
 }
 
 
@@ -267,3 +273,81 @@ function greeting(){
     bodyGreeting.innerHTML += `<p class="paragraph body-greeting">¿Qué necesitas?</p>`;
 }
 
+
+function populateOrdersFromUsers(){
+    
+    activateModal('getOrdersFromUsersModal');    
+    const getOrdersFromUsersModalContent = document.getElementById('getOrdersFromUsersModalContent');
+
+    getOrdersFromUsersModalContent.innerHTML = `
+        <div class="modal-header" style="height: 4rem; width: 100%; background-color: #5c3287">
+            <div>
+                <h5 class="logo-title" style="font-size: 1.4rem;">${(splitName(username)).firstName}, estas son tus ordenes</h5>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+
+                <ul class="list-group list-group-flush">
+                    ${populateSomething()}
+                </ul>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button 
+                class="btn paragraph"  
+                style="background-color: #440f71; color: white; font-size: 0.8rem; border-radius: 1.2rem;"
+                data-dismiss="modal"
+            >
+                Cerrar
+            </button>
+        </div>
+    `;
+}
+
+
+function populateSomething(){
+
+    const orders = getOrdersFromUsersByUsername(username);
+    let ul = [];
+
+    orders.forEach(order => {
+        ul.push(
+            `
+            <li class="list-group-item">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-7 paragraph product-title">
+                            ${order.nombreProducto}
+                        </div>
+
+                        <div class="col-5">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-8 paragraph" style="color: #5d5d5d; font-size: 0.85rem;">
+                            ${order.descripcion.substr(0, 27)}
+                        </div>
+
+                        <div class="col-4">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-7">
+                        </div>
+
+                        <div class="col-5 paragraph" style="color: #5d5d5d; font-weight: 900;">
+                            ${formatCurrency(order.precio)}
+                        </div>
+                    </div>
+                </div>
+            </li>
+            `
+        )
+    });
+
+    return ul.join(' ');
+}
