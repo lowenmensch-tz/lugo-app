@@ -19,4 +19,4 @@ Clon básico de la aplicación de Hugo
 
 
 # Formulario para agregar una categoría
-![](./img/running-app-ss/image-4.png)
+![](./img/running-app-ss/image-5.png)
