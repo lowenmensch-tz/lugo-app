@@ -289,7 +289,7 @@ function populateOrdersFromUsers(){
             <div class="card">
 
                 <ul class="list-group list-group-flush">
-                    ${populateSomething()}
+                    ${populateContentOrdersFromUsers()}
                 </ul>
 
             </div>
@@ -307,7 +307,7 @@ function populateOrdersFromUsers(){
 }
 
 
-function populateSomething(){
+function populateContentOrdersFromUsers(){
 
     const orders = getOrdersFromUsersByUsername(username);
     let ul = [];
@@ -350,4 +350,95 @@ function populateSomething(){
     });
 
     return ul.join(' ');
+}
+
+
+function addCompanyToCategory(){
+    
+    const checkboxAddCategory = document.getElementById('checkboxAddCategory');
+    const addCompanyToCategory = document.getElementById('addCompanyToCategory');
+    
+    addCompanyToCategory.innerHTML = ``;
+
+    if(checkboxAddCategory.checked){
+        addCompanyToCategory.innerHTML = `
+        <div class="form-group">
+            <label for="addNewNameCompany">Nombre de la Empresa</label>
+            <input type="text" class="form-control" id="addNewNameCompany">
+        </div>
+        <div class="form-group">
+            <label for="addNewNameProduct">Nombre del producto</label>
+            <input type="text" class="form-control" id="addNewNameProduct">
+        </div>
+        <div class="form-group">
+            <label for="addNewDescriptionProduct">Descripción del producto</label>
+            <input type="text" class="form-control" id="addNewDescriptionProduct">
+        </div>
+        <div class="form-group">
+            <label for="addNewPriceProduct">Precio del producto</label>
+            <input type="number" class="form-control" id="addNewPriceProduct">
+        </div>
+        `;        
+    }
+    
+}
+
+
+//Agrega la nueva categoría al LocalStorage 
+function processNewCategory(){
+    let newCategory = addNewCategory();
+
+    if (!document.getElementById('checkboxAddCategory').checked){
+        newCategory.empresas = [];
+    }
+    
+    updateNewCategory(newCategory);
+    document.getElementById('categories').innerHTML = '';
+    populateDataCardCategory();
+
+    $('#addCategoryDataModal').modal('hide');
+}
+
+
+function addNewCategory(){
+    
+    let newCategory = {
+        nombreCategoria: document.getElementById('addNewNameCategory').value,
+        descripcion: document.getElementById('addNewDescriptionCategory').value,
+        color: `#${selectRandomColor()}`,
+        icono: 'fab fa-angellist',
+        empresas: [addNewCompany()],
+    }
+
+    return newCategory;
+}
+
+// Sí existe el componente retorna el valor, de lo contrario, vacío
+function ifExistComponent(id){
+    return document.getElementById(id) ? document.getElementById(id).value : '';
+}
+
+
+function addNewCompany(){
+    let newCompany = {
+        nombreEmpresa: ifExistComponent('addNewNameCompany'),
+        imagen:"img/banner.jpg",
+        productos: [addNewProduct()]
+    }
+
+    return newCompany;
+}
+
+
+function addNewProduct(){
+    
+    let newProduct = {
+        nombreProducto: ifExistComponent('addNewNameProduct'),
+        descripcion: ifExistComponent('addNewDescriptionProduct'),
+        precio: convertTextToNumber(
+            ifExistComponent('addNewPriceProduct')
+        ),
+    }
+
+    return newProduct;
 }

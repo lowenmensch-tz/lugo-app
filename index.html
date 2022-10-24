@@ -89,6 +89,42 @@
     <div class="modal fade" id="addCategoryDataModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryDataModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content" id="addCategoryModalContent">
+                <div class="modal-header" style="height: 4rem; width: 100%; background-color: #5c3287">
+                    <div>
+                        <h5 class="logo-title" style="font-size: 1.4rem;">Agregar Categoría</h5>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <form id="formAddCategory">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Nombre</label>
+                          <input type="text" class="form-control" id="addNewNameCategory" aria-describedby="emailHelp">
+                        </div>
+                        <div class="form-group">
+                          <label for="addNewDescriptionCategory">Descripción</label>
+                          <input type="text" class="form-control" id="addNewDescriptionCategory">
+                        </div>
+                        <div class="form-group ml-4">
+                            <input class="form-check-input" type="checkbox" value="" id="checkboxAddCategory" onclick="addCompanyToCategory()">
+                            <label class="form-check-label" for="checkboxAddCategory">
+                              Agregar empresa
+                            </label>
+                        </div>
+                        <div class="form-group" id="addCompanyToCategory">
+
+                        </div>
+                      </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn ml-4 btn-nav-style"  
+                        id="btnAddCategory" 
+                        type="submit" 
+                        style="background-color: #440f71; color: white;" 
+                        onclick="processNewCategory()"
+                    >
+                        Agregar
+                    </button>
+                </div>
             </div>
         </div>
     </div>

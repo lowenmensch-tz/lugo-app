@@ -545,3 +545,11 @@ function updateUserPurchaseOrder(username, newOrder){
 
     saveDataUser(users);
 }
+
+
+function updateNewCategory(newCategory){
+    let categories = getCategories();
+    categories.push(newCategory)
+
+    saveDataCategory(categories);
+}
